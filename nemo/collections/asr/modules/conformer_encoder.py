@@ -470,6 +470,8 @@ class ConformerEncoder(NeuralModule, StreamingEncoder, Exportable, AccessMixin):
             cache_last_channel = cache_last_channel.transpose(0, 1)
             cache_last_time = cache_last_time.transpose(0, 1)
 
+        self.update_max_seq_length(seq_length=audio_signal.size(2), device=audio_signal.device)
+
         rets = self.forward_internal(
             audio_signal,
             length,
